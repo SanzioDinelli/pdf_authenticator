@@ -15,7 +15,7 @@ def upload_file(file: UploadFile):
     with open(file.filename, "wb") as buffer:
         shutil.copyfileobj(file.file,buffer)
 
-    method = 1
+    method = 2
     match method:
         case 1:
             ### Method 1
