@@ -35,6 +35,22 @@ def upload_file(file: UploadFile):
 
     return FileResponse(path=file.filename,media_type="application/octet-stream",filename=authenticate_file)
 
+@app.post("/file/save")
+def upload_file(file: UploadFile):
+    with open(file.filename, "wb") as buffer:
+        shutil.copyfileobj(file.file,buffer)
+    return file.filename
+
+@app.post("/file/name")
+def upload_file(file: UploadFile):    
+    return file.filename
+
+@app.post("/file/download")
+def upload_file(file: UploadFile):
+    with open(file.filename, "wb") as buffer:
+        shutil.copyfileobj(file.file,buffer)
+    return FileResponse(path=file.filename,media_type="application/octet-stream",filename=file.filename)
+
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, log_level="info")
     
